@@ -1,15 +1,18 @@
 import Link from 'next/link'
-import Layout from '../components/Layout'
+import React from 'react'
+import Sidebar from '../components/Sidebar'
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+const IndexPage = () => {
+
+  return (
+    <div className="bg-black h-screen overflow-hidden">
+      <main className="">
+        <Sidebar />
+      </main>
+
+      <div>{/* Player */}</div>
+    </div>
+  )
+}
 
 export default IndexPage
