@@ -8,7 +8,7 @@ const Sidebar = () => {
   console.log(session)
 
   return (
-    <div className="p-4 text-gray-400 text-sm">
+    <div className="p-4 bg-black text-gray-400 text-sm border-r border-gray-400 min-h-screen">
       <div className="space-y-4 mb-6">
         <button className="flex items-center space-x-2 hover:text-white" onClick={() => signOut()}>
           <HomeIcon className="h-5 w-5" />
@@ -48,7 +48,7 @@ const Sidebar = () => {
         </button>
       </div>
 
-      <div className="space-y-2 mb-6">
+      <div className="space-y-2 mb-6 h-screen overflow-y-scroll scrollbar-hide">
         <button className="flex items-center space-x-2 hover:text-white">
           <p>Playlist name...</p>
         </button>
@@ -65,6 +65,69 @@ const Sidebar = () => {
           <p>Playlist name...</p>
         </button>
 
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+
+
+
+
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
+
+        <button className="flex items-center space-x-2 hover:text-white">
+          <p>Playlist name...</p>
+        </button>
         <button className="flex items-center space-x-2 hover:text-white">
           <p>Playlist name...</p>
         </button>
