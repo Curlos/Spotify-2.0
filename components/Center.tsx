@@ -76,8 +76,6 @@ const Center = () => {
 
         <Songs />
       </section>
-
-      <Player />
     </div>
   )
 }

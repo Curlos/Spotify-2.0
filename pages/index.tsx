@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 import Center from '../components/Center'
+import Player from '../components/Player'
 import Sidebar from '../components/Sidebar'
 
 const IndexPage = () => {
@@ -12,7 +13,7 @@ const IndexPage = () => {
         <Center />
       </main>
 
-      <div>{/* Player */}</div>
+      <Player />
     </div>
   )
 }
