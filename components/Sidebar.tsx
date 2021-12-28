@@ -27,7 +27,7 @@ const Sidebar = () => {
   console.log(playlists)
 
   return (
-    <div className="p-4 px-8 bg-black text-gray-400 text-sm border-r border-gray-400 h-screen overflow-y-scroll scrollbar-hide max-w-[8rem] md:hidden">
+    <div className="p-4 px-8 bg-black text-gray-400 text-sm border-r border-gray-400 h-screen overflow-y-scroll scrollbar-hide max-w-[350px] md:hidden">
       <div className="space-y-4 mb-6">
         <button className="flex items-center space-x-2 hover:text-white" onClick={() => signOut()}>
           <HomeIcon className="h-5 w-5" />
@@ -70,7 +70,11 @@ const Sidebar = () => {
       <div className="space-y-2 mb-6">
         {playlists.map((playlist) =>
           <p key={playlist.id} onClick={() => setPlaylistId(playlist.id)} className={`cursor-pointer hover:text-white ${playlist.id === playlistId && 'text-white'}`}>
-            {playlist.name}
+            {playlist.name.length <= 22 ? (
+              playlist.name
+            ) : (
+              playlist.name.slice(0, 22) + '...'
+            )}
           </p>
         )}
       </div>

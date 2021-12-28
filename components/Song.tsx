@@ -45,7 +45,7 @@ const Song = ({ track, order }: Props) => {
       </div>
 
       <div className="flex items-center justify-between space-x-7 ml-auto md:ml-0">
-        <p className="w-40 truncate">{track.track.album.name}</p>
+        <p className="w-40 truncate lg:opacity-0">{track.track.album.name}</p>
         <p>{millisToMinutesAndSeconds(track.track.duration_ms)}</p>
       </div>
     </div>

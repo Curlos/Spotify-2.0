@@ -1,10 +1,11 @@
-import { FastForwardIcon, PauseIcon, PlayIcon, ReplyIcon, RewindIcon, SwitchHorizontalIcon } from '@heroicons/react/outline'
+import { FastForwardIcon, PauseIcon, PlayIcon, ReplyIcon, RewindIcon, SwitchHorizontalIcon, VolumeUpIcon, VolumeOffIcon } from '@heroicons/react/outline'
 import { useSession } from 'next-auth/react'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { currentTrackIdState, isPlayingState } from '../atoms/songAtom'
 import useSongInfo from '../hooks/useSongInfo'
 import useSpotify from '../hooks/useSpotify'
+import { debounce } from 'lodash'
 
 const Player = () => {
   const spotifyApi = useSpotify()
@@ -32,11 +33,13 @@ const Player = () => {
 
   const handlePlayPause = () => {
     spotifyApi.getMyCurrentPlaybackState().then((data) => {
-      if (data.body_is_playing) {
-        spotifyApi.pause()
+      console.log(data)
+      if (data.body._is_playing) {
+        // spotifyApi.pause()
+        spotifyApi.playing = !(spotifyApi.playing)
         setIsPlaying(false)
       } else {
-        spotifyApi.play()
+        // spotifyApi.play()
         setIsPlaying(true)
       }
     })
@@ -50,9 +53,21 @@ const Player = () => {
     }
   }, [currentTrackIdState, spotifyApi, session])
 
+  useEffect(() => {
+    if (volume > 0 && volume < 100) {
+      debouncedAdjustVolume(volume)
+    }
+  }, [volume])
+
+  const debouncedAdjustVolume = useCallback(
+    debounce((volume) => {
+      spotifyApi.setVolume(volume).catch((err) => { })
+    }, 200),
+    [])
+
   return (
-    <div className="h-18 bg-gradient-to-b from-purple-900 to-purple-500 text-white bottom-0 left-0 fixed w-screen p-4">
-      <div className="flex items-center space-x-4">
+    <div className="h-18 bg-gradient-to-b from-black to-gray-900 text-white bottom-0 left-0 fixed w-screen p-4 grid grid-cols-3">
+      <div className="flex xl:block space-x-2 xl:space-x-0">
         <div>
           <img
             className="md:inline h-12 w-12"
@@ -65,11 +80,55 @@ const Player = () => {
           <h3>{songInfo?.name}</h3>
           <p>{songInfo?.artists?.[0]?.name}</p>
         </div>
-
-
       </div>
+
+      <div className="flex items-center justify-evenly">
+        <SwitchHorizontalIcon className="button" />
+
+        <RewindIcon
+          onClick={() => spotifyApi.skipToPrevious()}
+          className="button"
+        />
+
+        {isPlaying ? (
+          <PauseIcon
+            onClick={handlePlayPause}
+            className="button h-10 w-10" />
+        ) : (
+          <PlayIcon
+            onClick={handlePlayPause}
+            className="button h-10 w-10" />
+        )}
+
+        <FastForwardIcon
+          onClick={() => spotifyApi.skipToNext()}
+          className="button"
+        />
+
+        <ReplyIcon className="button" />
+      </div>
+
+      <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5">
+        <VolumeOffIcon
+          onClick={() => volume > 0 && setVolume(volume - 10)}
+          className="button" />
+        <input
+          className="w-14 md:w-28"
+          type="range"
+          value={volume}
+          onChange={(e) => setVolume(Number(e.target.value))}
+          min={0}
+          max={100}
+        />
+        <VolumeUpIcon
+          onClick={() => volume < 100 && setVolume(volume + 10)}
+          className="button" />
+      </div>
+
+
     </div>
   )
 }
 
 export default Player
+
